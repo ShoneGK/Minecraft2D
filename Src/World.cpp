@@ -8,7 +8,7 @@ int main()
     {
         BeginDrawing();
 
-        ClearBackground(BLACK);
+        ClearBackground(BLUE);
 
         DrawFPS(10, 10);
         EndDrawing();
