@@ -1,8 +1,8 @@
 #include "raylib.h"
 #include "raymath.h"
 
-const int screenWidth = 1500;
-const int screenHeight = 600;
+float screenWidth = 1500;
+float screenHeight = 600;
 
 int hotBarScale = 2;
 
