@@ -18,9 +18,11 @@ int main()
 
     // setting up the hotbar
     Texture2D hotBar = LoadTexture("Assets/Textures/MC2D/Assets/GUI/hotbar.png");
+    
     Rectangle hotBarSrc = {0,0,182,22};
+    
     Rectangle hotBarDest = {screenWidth/2 - hotBar.width/2 * hotBarScale, screenHeight - hotBar.height/2 - 20 * hotBarScale, hotBar.width * hotBarScale, hotBar.height * hotBarScale};
-
+    
     while (!WindowShouldClose())
     {
         // if the current screen dimensions are diffrent
@@ -30,7 +32,7 @@ int main()
             screenWidth = GetScreenWidth();
             hotBarDest.x = screenWidth/2 - hotBar.width/2 * hotBarScale;
             hotBarDest.y = screenHeight - hotBar.height/2 - 20 * hotBarScale;
-            std::cout << "Display Resized : " << "(" << screenWidth << "," << screenHeight << ")" << std::endl;
+            //std::cout << "Display Resized : " << "(" << screenWidth << "," << screenHeight << ")" << std::endl;
         }
         
         BeginDrawing();
