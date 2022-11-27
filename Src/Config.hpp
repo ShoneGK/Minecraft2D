@@ -1,4 +1,6 @@
 #pragma once
+
+// hotBar configuration
 struct {
     int x;
     int y;
@@ -10,4 +12,4 @@ struct {
     Rectangle src;
     Rectangle dest;
     Texture2D texture;
-} hotBars;
+} hotBar;
