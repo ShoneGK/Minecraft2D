@@ -1,48 +1,59 @@
 #include "raylib.h"
 #include "raymath.h"
 
+#include "Config.hpp"
+
 // debugging
 #include <iostream>
 
 int screenWidth = 600;
 int screenHeight = 300;
 
-int hotBarScale = 2;
-
 int main()
 {
-    // allow the window to be resized by the user
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    InitWindow(screenWidth, screenHeight, "Minecraft2D (DEBUG)");
 
-    InitWindow(screenWidth, screenHeight, "Minecraft2D");
+    // configuring the hotBar
+    hotBars.x = 0;
+    hotBars.y = 0;
+    hotBars.width = 182;
+    hotBars.height = 22;
+    hotBars.scale = 2;
+    hotBars.screenX = screenWidth;
+    hotBars.screenY = screenHeight;
+    hotBars.texture = LoadTexture("Assets/Textures/BareBones/assets/minecraft/textures/gui/widgets.png");
 
-    // setting up the hotbar
-    Texture2D hotBar = LoadTexture("Assets/Textures/MC2D/Assets/GUI/hotbar.png");
-    
-    Rectangle hotBarSrc = {0,0,182,22};
-    
-    Rectangle hotBarDest = {screenWidth/2 - hotBar.width/2 * hotBarScale, screenHeight - hotBar.height/2 - 20 * hotBarScale, hotBar.width * hotBarScale, hotBar.height * hotBarScale};
-    
+    hotBars.src = (Rectangle){hotBars.x,
+                              hotBars.y,
+                              hotBars.width,
+                              hotBars.height};
+
+    hotBars.dest = (Rectangle){hotBars.screenX / 2 - hotBars.width / 2 * hotBars.scale,
+                               hotBars.screenY - hotBars.height / 2 - 20 * hotBars.scale,
+                               hotBars.width * hotBars.scale,
+                               hotBars.height * hotBars.scale};
+
     while (!WindowShouldClose())
     {
         // if the current screen dimensions are diffrent
         // from the old screen dimensions, recalculate all GUI components
-        if(IsWindowResized()){
+        if (IsWindowResized())
+        {
             screenHeight = GetScreenHeight();
             screenWidth = GetScreenWidth();
-            hotBarDest.x = screenWidth/2 - hotBar.width/2 * hotBarScale;
-            hotBarDest.y = screenHeight - hotBar.height/2 - 20 * hotBarScale;
-            //std::cout << "Display Resized : " << "(" << screenWidth << "," << screenHeight << ")" << std::endl;
+            hotBars.dest.x = screenWidth / 2 - hotBars.width / 2 * hotBars.scale;
+            hotBars.dest.y = screenHeight - hotBars.height / 2 - 20 * hotBars.scale;
         }
-        
+
         BeginDrawing();
 
         ClearBackground(BLUE);
-        
-        DrawTexturePro(hotBar, hotBarSrc, hotBarDest, Vector2Zero(), 0, WHITE);
+
+        DrawTexturePro(hotBars.texture, hotBars.src, hotBars.dest, Vector2Zero(), 0, WHITE);
 
         DrawFPS(10, 10);
-     
+
         EndDrawing();
     }
     CloseWindow();
